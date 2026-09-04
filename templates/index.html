@@ -3,43 +3,43 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Artify — character art for motion</title>
+    <title>Artify — character art, reimagined</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
   </head>
   <body>
-    <main class="shell">
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Artify home"><span class="brand-mark">a</span><span>Artify</span></a>
+      <div class="header-note"><span class="signal"></span> Works privately on your device</div>
+    </header>
+    <main>
       <section class="hero">
-        <p class="eyebrow">ARTIFY / LOCAL CHARACTER RENDERER</p>
-        <h1>Turn motion into<br /><span>character art.</span></h1>
-        <p class="intro">Drop in a video or image. Artify rebuilds it with colored letters, numbers, dots, and symbols.</p>
+        <p class="kicker">CHARACTER ART, REIMAGINED</p>
+        <h1>Make every moment<br /><em>something else.</em></h1>
+        <p class="lede">Transform a video or image into expressive art made from letters, symbols, colour and motion.</p>
       </section>
-      <section class="panel">
+      <section class="studio" aria-label="Artify studio">
+        <div class="studio-topline"><div><span class="step">01</span><strong>Choose your moment</strong></div><span id="format-note">Video or image</span></div>
         <form id="art-form">
           <label class="drop-zone" for="media">
             <input id="media" name="media" type="file" accept="{{ accepted | join(',') }}" required />
-            <span class="plus">+</span>
-            <strong id="file-label">Choose a video or image</strong>
-            <small>MP4, MOV, MKV, AVI, WEBM, PNG, JPG, WEBP, BMP</small>
+            <span class="orb"><span>+</span></span><strong id="file-label">Add a video or image</strong><small>MP4, MOV, MKV, AVI, WEBM, PNG, JPG, WEBP or BMP</small>
           </label>
-          <div class="settings">
-            <label>Detail <input name="width" type="number" min="40" max="260" value="140" /></label>
-            <label>Frames/sec <input name="fps" type="number" min="1" max="24" value="10" /></label>
-            <label>Contrast <input name="contrast" type="number" min="0.5" max="2" step="0.1" value="1.1" /></label>
+          <div class="controls">
+            <div class="control-heading"><div><span class="step">02</span><strong>Shape the result</strong></div><button class="reset" id="reset" type="button">Reset</button></div>
+            <div class="control-grid">
+              <label><span>Detail</span><output id="detail-output">140</output><input name="width" id="width" type="range" min="60" max="240" step="10" value="140" /></label>
+              <label><span>Motion</span><output id="motion-output">10 fps</output><input name="fps" id="fps" type="range" min="4" max="18" step="1" value="10" /></label>
+              <label><span>Contrast</span><output id="contrast-output">Balanced</output><input name="contrast" id="contrast" type="range" min="0.8" max="1.5" step="0.1" value="1.1" /></label>
+            </div>
           </div>
-          <button id="artify" type="submit">Artify <span>→</span></button>
+          <button id="artify" class="primary-action" type="submit"><span>Artify</span><span class="arrow">→</span></button>
         </form>
-        <section id="status" class="status hidden" aria-live="polite">
-          <div class="progress-label"><span id="status-message">Preparing</span><span id="percent">0%</span></div>
-          <div class="track"><div id="bar"></div></div>
-        </section>
-        <section id="result" class="result hidden">
-          <p class="eyebrow">RENDER COMPLETE</p>
-          <img id="preview" alt="Generated character art" />
-          <a id="save" class="save" download>Save art <span>↓</span></a>
-        </section>
+        <section id="status" class="status hidden" aria-live="polite"><div class="status-copy"><span id="status-message">Preparing your canvas</span><span id="percent">0%</span></div><div class="track"><div id="bar"></div></div></section>
+        <section id="result" class="result hidden"><div class="result-heading"><div><span class="step">03</span><strong>Your Artify is ready</strong></div><span class="finished">Complete</span></div><div class="preview-wrap"><img id="preview" alt="Generated character art" /></div><a id="save" class="save" download><span>Save your Artify</span><span class="download-icon">↓</span></a></section>
       </section>
-      <p class="footnote">Your files stay on your computer. Artify runs locally in your browser.</p>
+      <section class="promise"><div><span class="promise-number">01</span><h2>Your media stays yours.</h2><p>Artify runs on your device. Nothing is sent away.</p></div><div><span class="promise-number">02</span><h2>Every frame has a new language.</h2><p>Letters, dots, numbers and symbols carry each image forward.</p></div></section>
     </main>
+    <footer>Artify <span>·</span> A new way to see a moment.</footer>
     <script src="{{ url_for('static', filename='app.js') }}"></script>
   </body>
 </html>

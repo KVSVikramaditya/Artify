@@ -11,7 +11,7 @@ class ArtifyWebTests(unittest.TestCase):
             app = create_app(Path(runtime))
             response = app.test_client().get("/")
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b"Turn motion into", response.data)
+        self.assertIn(b"Make every moment", response.data)
 
     def test_empty_upload_is_rejected(self):
         with tempfile.TemporaryDirectory() as runtime:

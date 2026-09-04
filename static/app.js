@@ -6,16 +6,34 @@ const message = document.querySelector('#status-message');
 const percent = document.querySelector('#percent');
 const bar = document.querySelector('#bar');
 const result = document.querySelector('#result');
+const controls = {
+  width: { input: document.querySelector('#width'), output: document.querySelector('#detail-output'), format: value => value },
+  fps: { input: document.querySelector('#fps'), output: document.querySelector('#motion-output'), format: value => `${value} fps` },
+  contrast: { input: document.querySelector('#contrast'), output: document.querySelector('#contrast-output'), format: value => value < 1 ? 'Soft' : value > 1.2 ? 'Bold' : 'Balanced' },
+};
 
 fileInput.addEventListener('change', () => {
-  fileLabel.textContent = fileInput.files[0]?.name || 'Choose a video or image';
+  const file = fileInput.files[0];
+  fileLabel.textContent = file?.name || 'Add a video or image';
+  document.querySelector('#format-note').textContent = file ? 'Ready to Artify' : 'Video or image';
+});
+
+Object.values(controls).forEach(({ input, output, format }) => {
+  input.addEventListener('input', () => { output.textContent = format(input.value); });
+});
+
+document.querySelector('#reset').addEventListener('click', () => {
+  controls.width.input.value = 140;
+  controls.fps.input.value = 10;
+  controls.contrast.input.value = 1.1;
+  Object.values(controls).forEach(({ input, output, format }) => { output.textContent = format(input.value); });
 });
 
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
   const button = document.querySelector('#artify');
   button.disabled = true;
-  button.textContent = 'Artifying…';
+  button.innerHTML = '<span>Creating your Artify…</span><span class="arrow">→</span>';
   result.classList.add('hidden');
   status.classList.remove('hidden');
   try {
@@ -27,7 +45,7 @@ form.addEventListener('submit', async (event) => {
     message.textContent = error.message;
   } finally {
     button.disabled = false;
-    button.innerHTML = 'Artify <span>→</span>';
+    button.innerHTML = '<span>Artify</span><span class="arrow">→</span>';
   }
 });
 
