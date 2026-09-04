@@ -56,7 +56,7 @@ Start Characterify
 Characterify this video
 ```
 
-The agent instructions live in `AGENTS.md` and `skills/characterify/SKILL.md`. A standalone collection with adapters for Codex, Cursor, and VS Code/Copilot is available in the `vikramaditya-agents/` package. Copy the adapter for your tool into the project that will use it, then start a chat with one of the phrases above. Agent instructions guide a compatible tool; they do not execute by themselves.
+The agent instructions live in `AGENTS.md` and `skills/characterify/SKILL.md`. A standalone collection with adapters for Codex, Cursor, and VS Code/Copilot is available in [vikramaditya-agents](https://github.com/KVSVikramaditya/vikramaditya-agents). Copy the adapter for your tool into the project that will use it, then start a chat with one of the phrases above. Agent instructions guide a compatible tool; they do not execute by themselves.
 
 ## Use cases
 
