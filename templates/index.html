@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Artify — character art for motion</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <p class="eyebrow">ARTIFY / LOCAL CHARACTER RENDERER</p>
+        <h1>Turn motion into<br /><span>character art.</span></h1>
+        <p class="intro">Drop in a video or image. Artify rebuilds it with colored letters, numbers, dots, and symbols.</p>
+      </section>
+      <section class="panel">
+        <form id="art-form">
+          <label class="drop-zone" for="media">
+            <input id="media" name="media" type="file" accept="{{ accepted | join(',') }}" required />
+            <span class="plus">+</span>
+            <strong id="file-label">Choose a video or image</strong>
+            <small>MP4, MOV, MKV, AVI, WEBM, PNG, JPG, WEBP, BMP</small>
+          </label>
+          <div class="settings">
+            <label>Detail <input name="width" type="number" min="40" max="260" value="140" /></label>
+            <label>Frames/sec <input name="fps" type="number" min="1" max="24" value="10" /></label>
+            <label>Contrast <input name="contrast" type="number" min="0.5" max="2" step="0.1" value="1.1" /></label>
+          </div>
+          <button id="artify" type="submit">Artify <span>→</span></button>
+        </form>
+        <section id="status" class="status hidden" aria-live="polite">
+          <div class="progress-label"><span id="status-message">Preparing</span><span id="percent">0%</span></div>
+          <div class="track"><div id="bar"></div></div>
+        </section>
+        <section id="result" class="result hidden">
+          <p class="eyebrow">RENDER COMPLETE</p>
+          <img id="preview" alt="Generated character art" />
+          <a id="save" class="save" download>Save art <span>↓</span></a>
+        </section>
+      </section>
+      <p class="footnote">Your files stay on your computer. Artify runs locally in your browser.</p>
+    </main>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>
